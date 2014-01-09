@@ -1,0 +1,3 @@
+[submodule "base/patavi"]
+	path = base/patavi
+	url = git@github.com:joelkuiper/patavi.git
