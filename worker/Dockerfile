@@ -6,7 +6,3 @@ RUN R -e 'install.packages("Rserve", repos="http://www.rforge.net/"); if (!requi
 RUN R -e 'install.packages("RJSONIO", repos="http://cran.rstudio.com/"); if (!require("RJSONIO")) quit(save="no", status=8)'
 RUN R -e 'install.packages("Cairo", repos="http://cran.rstudio.com/"); if (!require("Cairo")) quit(save="no", status=8)'
 RUN R -e 'install.packages("base64enc", repos="http://cran.rstudio.com/"); if (!require("base64enc")) quit(save="no", status=8)'
-
-USER patavi
-ENV HOME /var/lib/patavi
-ENTRYPOINT ["/var/lib/patavi/bin/patavi-worker", "--method", "slow", "--rserve", "-n", "1", "--file", "/var/lib/patavi/src/worker/resources/pirate/slow.R"]

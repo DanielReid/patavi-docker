@@ -1,4 +1,4 @@
-all: _server _worker
+all: _server _slow
 
 _%: %/Dockerfile
 	cd $(dir $<) && docker build -t patavi/$* .
@@ -8,3 +8,4 @@ _base: _build-ready
 
 _server: _base
 _worker: _base
+_slow: _worker
