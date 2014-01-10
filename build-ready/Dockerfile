@@ -24,13 +24,15 @@ RUN rm -Rf zeromq-3.2.4
 
 # dependencies for building jzmq
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q pkg-config
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q unzip 
 
 # build & install jzmq
-RUN curl --location "https://github.com/zeromq/jzmq/archive/v2.2.2.tar.gz" | tar xzf -
-RUN cd jzmq-2.2.2 && ./autogen.sh
-RUN cd jzmq-2.2.2 && ./configure
-RUN cd jzmq-2.2.2 && make
-RUN cd jzmq-2.2.2 && make install
+RUN curl --location https://github.com/zeromq/jzmq/archive/master.zip -o jzmq-master.zip
+RUN unzip jzmq-master.zip
+RUN cd jzmq-master && ./autogen.sh
+RUN cd jzmq-master && ./configure
+RUN cd jzmq-master && make
+RUN cd jzmq-master && make install
 
 # create patavi user
 RUN useradd --create-home --home /var/lib/patavi patavi
