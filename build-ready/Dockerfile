@@ -1,6 +1,7 @@
-FROM stackbrew/ubuntu:13.10
+FROM ubuntu:14.04
 
 RUN apt-get update
+RUN apt-get upgrade -y
 
 # install openjdk-7, getting around the fuse requirement with fakeroot
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q fakeroot 
@@ -39,6 +40,6 @@ RUN useradd --create-home --home /var/lib/patavi patavi
 
 # download & install leiningen
 RUN su patavi -c 'mkdir /var/lib/patavi/bin'
-RUN su patavi -c 'curl "https://raw.github.com/technomancy/leiningen/stable/bin/lein" -o /var/lib/patavi/bin/lein' 
+RUN su patavi -c 'curl -L "https://raw.github.com/technomancy/leiningen/stable/bin/lein" -o /var/lib/patavi/bin/lein' 
 RUN chmod +x /var/lib/patavi/bin/lein
 RUN su - patavi -c 'lein upgrade'
