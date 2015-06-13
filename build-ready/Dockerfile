@@ -1,11 +1,7 @@
-FROM ubuntu:14.04
+FROM azul/zulu-openjdk:7u65
 
 RUN apt-get update
 RUN apt-get upgrade -y
-
-# install openjdk-7, getting around the fuse requirement with fakeroot
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q fakeroot 
-RUN DEBIAN_FRONTEND=noninteractive fakeroot apt-get install -y -q openjdk-7-jdk
 
 # dependencies for building zeromq
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q build-essential 
@@ -28,12 +24,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q pkg-config
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q unzip 
 
 # build & install jzmq
-RUN curl --location https://github.com/zeromq/jzmq/archive/master.zip -o jzmq-master.zip
-RUN unzip jzmq-master.zip
-RUN cd jzmq-master && ./autogen.sh
-RUN cd jzmq-master && ./configure
-RUN cd jzmq-master && make
-RUN cd jzmq-master && make install
+RUN curl --location https://github.com/zeromq/jzmq/archive/v3.1.0.zip -o jzmq.zip
+RUN unzip jzmq.zip
+RUN cd jzmq-3.1.0 && ./autogen.sh
+RUN cd jzmq-3.1.0 && ./configure
+RUN cd jzmq-3.1.0 && make
+RUN cd jzmq-3.1.0 && make install
 
 # create patavi user
 RUN useradd --create-home --home /var/lib/patavi patavi
