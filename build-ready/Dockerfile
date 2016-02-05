@@ -1,5 +1,8 @@
 FROM azul/zulu-openjdk:7u65
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 RUN apt-get update
 RUN apt-get upgrade -y
 
